@@ -1,0 +1,669 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* MAIN */
+.menu-container {
+  min-height: 100vh;
+  width: 100%;
+  background: #f5efe7;
+}
+
+/* TOP BAR */
+.topbar {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  padding: 16px;
+}
+
+.left {
+  text-align: left;
+}
+
+.center {
+  text-align: center;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.right {
+  text-align: right;
+}
+
+.icon-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 24px;
+}
+
+/* GRID */
+.food-grid {
+  display: grid;
+  gap: 16px;
+  padding: 16px;
+
+  grid-template-columns: repeat(2, 1fr);
+}
+
+/* TABLET */
+@media (min-width: 768px) {
+  .food-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* DESKTOP */
+@media (min-width: 1024px) {
+  .food-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* CARD */
+.food-card {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+}
+
+/* IMAGE */
+.food-img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+
+/* CONTENT */
+.food-content {
+  padding: 12px;
+}
+
+/* HEADER */
+.food-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.food-header h3 {
+  font-size: 16px;
+}
+
+/* STAR */
+.star {
+  color: #f59e0b;
+}
+
+/* PRICE */
+.price {
+  margin-top: 4px;
+  font-size: 14px;
+  color: #555;
+}
+
+/* BUTTON */
+.add-btn {
+  margin-top: 10px;
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 25px;
+  background: #b45309;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+/* --- Global Variables & Resets --- */
+:root {
+  --primary-brown: #a0522d; /* Brown accent color */
+  --dark-bg: #1a1a1a; /* Navbar background */
+  --dark-accent: #262626; /* Search bar background */
+  --light-bg: #f8f8f8; /* Content background */
+  --text-white: #ffffff;
+  --text-black: #000000;
+  --radio-selected: #d2b48c; /* Tan radio color */
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: sans-serif; background-color: var(--light-bg); }
+
+/* --- Layout Helpers --- */
+.flex { display: flex; }
+.flex-col { flex-direction: column; }
+.items-center { align-items: center; }
+.justify-between { justify-content: space-between; }
+.gap-x-1 { gap: 1rem; }
+.gap-x-05 { gap: 0.5rem; }
+.gap-y-1 { gap: 1rem; }
+.padding-x { padding-left: 1.5rem; padding-right: 1.5rem; }
+.full-width { width: 100%; }
+
+/* --- Color & Background Classes --- */
+.dark-bg { background-color: var(--dark-bg); }
+.dark-accent-bg { background-color: var(--dark-accent); }
+.light-bg { background-color: var(--light-bg); }
+.brown-bg { background-color: var(--primary-brown); }
+.text-white { color: var(--text-white); }
+.text-black { color: var(--text-black); }
+.icon-white { filter: brightness(0) invert(1); } /* Makes dark icons white */
+.icon-brown { filter: sepia(100%) saturate(300%) hue-rotate(350deg); } /* Styles icon brown */
+
+/* --- Navbar Styles --- */
+.navbar { padding: 1rem 1.5rem; }
+.navbar-content { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem; }
+.navbar-title { font-size: 1.25rem; font-weight: bold; }
+.icon-button { background: none; border: none; cursor: pointer; padding: 0.25rem; }
+.icon-spacer { width: 24px; } /* Matches icon width for centering title */
+.search-bar input { width: 100%; padding: 0.5rem 1rem; border: none; border-radius: 4px; }
+
+/* --- Payment Page Specifics --- */
+.section-title { font-size: 1rem; font-weight: bold; margin: 1.5rem 0 1rem; }
+.payment-method-container { background: #fff; padding: 1rem; border-radius: 8px; border: 1px solid #eee; cursor: pointer; transition: background 0.2s; }
+.payment-method-container:hover { background-color: #fafafa; }
+.method-selected { border-color: var(--radio-selected); background-color: #fff9f0; } /* Selected state */
+.method-label { font-weight: 500; }
+.payment-icon { width: 24px; height: 24px; object-fit: contain; }
+.payment-logo { height: 24px; object-fit: contain; }
+
+/* Nested UPI Options */
+.upi-options-container { margin-top: 0.5rem; padding: 1rem 1.5rem; background: #fff; border-radius: 8px; border: 1px dashed #ccc; }
+.upi-logo { height: 20px; object-fit: contain; }
+
+/* Radio Button Styling */
+.payment-radio { appearance: none; width: 18px; height: 18px; border: 2px solid #ccc; border-radius: 50%; outline: none; cursor: pointer; }
+.radio-selected:checked { border-color: var(--radio-selected); background-color: var(--radio-selected); box-shadow: inset 0 0 0 3px #fff; }
+.radio-accent:checked { border-color: var(--primary-brown); background-color: var(--primary-brown); box-shadow: inset 0 0 0 3px #fff; }
+
+/* --- Reusable Button Styles --- */
+.custom-button { padding: 1rem; border: none; border-radius: 8px; color: #fff; font-weight: bold; font-size: 1rem; cursor: pointer; transition: opacity 0.2s; text-align: center; }
+.custom-button:hover:not(.disabled) { opacity: 0.9; }
+.custom-button.disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* --- Sticky Footer --- */
+.sticky-footer { position: fixed; bottom: 0; left: 0; width: 100%; padding: 1rem 1.5rem; background-color: var(--light-bg); border-top: 1px solid #eee; box-shadow: 0 -2px 10px rgba(0,0,0,0.05); }
+.payment-page-container { padding-bottom: 80px; } /* Prevents content from being hidden behind footer */
+
+/* Base button */
+.custom-button {
+  background: #c45a00;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  padding: 10px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+
+  transition: all 0.3s ease;
+}
+
+/* Hover */
+.custom-button:hover {
+  background: #a94d00;
+}
+
+/* Active click */
+.custom-button:active {
+  transform: scale(0.97);
+}
+
+/* Disabled */
+.custom-button.disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+/* Full width (for cards like your UI) */
+.custom-button.full-width {
+  width: 100%;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .custom-button {
+    font-size: 13px;
+    padding: 8px 12px;
+  }
+}
+/* Navbar container */
+.navbar {
+  background: #1e1e1e;
+  padding: 12px;
+  border-radius: 0 0 16px 16px;
+}
+
+/* Top section */
+.navbar-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Title */
+.navbar-title {
+  color: white;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+/* Icons */
+.icon-button {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: white;
+  padding: 8px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-button:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Spacer */
+.icon-spacer {
+  width: 32px;
+}
+
+/* Search bar */
+.search-bar {
+  margin-top: 10px;
+  background: #2c2c2c;
+  border-radius: 10px;
+  padding: 6px 10px;
+}
+
+.search-bar input {
+  width: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: white;
+  font-size: 14px;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .navbar-title {
+    font-size: 16px;
+  }
+
+  .icon-button {
+    padding: 6px;
+  }
+}
+/* Card */
+.food-card {
+  background: #fff;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease;
+}
+
+.food-card:hover {
+  transform: translateY(-4px);
+}
+
+/* Image */
+.food-img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+}
+
+/* Content */
+.food-content {
+  padding: 10px;
+}
+
+/* Header */
+.food-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Name */
+.food-name {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+/* Rating */
+.rating-box {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 13px;
+}
+
+.star {
+  color: #f5a623;
+}
+
+/* Price */
+.price {
+  font-weight: bold;
+  margin: 6px 0;
+}
+
+/* Button */
+.add-btn {
+  width: 100%;
+  background: #c45a00;
+  color: white;
+  border: none;
+  padding: 8px;
+  border-radius: 20px;
+  font-size: 14px;
+  cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+
+  transition: 0.3s;
+}
+
+.add-btn:hover {
+  background: #a94d00;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .food-img {
+    height: 120px;
+  }
+
+  .food-name {
+    font-size: 14px;
+  }
+
+  .add-btn {
+    font-size: 13px;
+    padding: 7px;
+  }
+}
+/* Container */
+.menu-container {
+  width: 100%;
+  min-height: 100vh;
+  padding: 16px;
+  background: #f7f4ef;
+}
+
+/* Category Tabs */
+.category-tabs {
+  display: flex;
+  gap: 10px;
+  margin: 12px 0;
+  overflow-x: auto;
+}
+
+.tab-btn {
+  border: none;
+  padding: 8px 14px;
+  border-radius: 12px;
+  background: #eee;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.tab-btn.active {
+  background: #c45a00;
+  color: white;
+}
+
+/* Grid */
+.food-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+/* Responsive */
+@media (max-width: 400px) {
+  .food-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.cart-container {
+  padding: 16px;
+  background: #f7f4ef;
+  min-height: 100vh;
+}
+
+/* ITEM */
+.cart-item {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 15px;
+  background: #fff;
+  padding: 10px;
+  border-radius: 12px;
+}
+
+.cart-img {
+  width: 70px;
+  height: 70px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.cart-info {
+  flex: 1;
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+}
+
+.rating {
+  font-size: 13px;
+  color: #888;
+}
+
+.bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* QTY */
+.qty {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.qty button {
+  border: none;
+  padding: 4px 8px;
+  border-radius: 6px;
+  background: #eee;
+}
+
+/* BILL */
+.bill {
+  margin-top: 20px;
+  background: #fff;
+  padding: 12px;
+  border-radius: 12px;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  margin: 6px 0;
+}
+
+.total {
+  font-weight: bold;
+}
+
+/* BUTTON */
+.pay-btn {
+  width: 100%;
+  margin-top: 15px;
+  padding: 12px;
+  border: none;
+  border-radius: 25px;
+  background: #c45a00;
+  color: white;
+  font-size: 16px;
+}
+
+/* RESPONSIVE */
+@media (min-width: 768px) {
+  .cart-container {
+    max-width: 500px;
+    margin: auto;
+  }
+}
+.payment-container {
+  padding: 16px;
+  background: #f7f4ef;
+  min-height: 100vh;
+}
+
+/* Search */
+.search-box {
+  margin: 10px 0;
+}
+
+.search-box input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  background: #2c2c2c;
+  color: white;
+}
+
+/* Heading */
+.heading {
+  margin: 10px 0;
+  font-size: 14px;
+  color: #555;
+}
+
+/* Card */
+.pay-card {
+  background: #fff;
+  padding: 14px;
+  border-radius: 12px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+/* Active */
+.pay-card.active {
+  border: 2px solid #c45a00;
+}
+
+/* Radio */
+.radio {
+  width: 16px;
+  height: 16px;
+  border: 2px solid #c45a00;
+  border-radius: 50%;
+}
+
+.pay-card.active .radio {
+  background: #c45a00;
+}
+
+/* Button */
+.pay-btn {
+  width: 100%;
+  margin-top: 20px;
+  padding: 12px;
+  border-radius: 25px;
+  border: none;
+  background: #c45a00;
+  color: white;
+  font-size: 16px;
+}
+
+/* Responsive */
+@media (min-width: 768px) {
+  .payment-container {
+    max-width: 500px;
+    margin: auto;
+  }
+}
+/* Dropdown Card */
+.dropdown-card {
+  background: #fff;
+  border-radius: 12px;
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+
+/* Header */
+.dropdown-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 14px;
+  cursor: pointer;
+}
+
+/* Content */
+.dropdown-content {
+  border-top: 1px solid #eee;
+}
+
+/* Option */
+.option {
+  padding: 12px;
+  cursor: pointer;
+}
+
+.option:hover {
+  background: #f5f5f5;
+}
+
+/* Selected */
+.option.active {
+  background: #c45a00;
+  color: white;
+}
+/* Option row */
+.option {
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.option svg {
+  font-size: 18px;
+}
