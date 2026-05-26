@@ -29,10 +29,12 @@ useEffect(() => {
     .then((res) => res.json())
     .then((data) => {
       console.log("API DATA:", data);
+
       setFoodData(data.data || []);
-      console.log("MENU DATA:", data.data);
     })
-    .catch((err) => console.log(err));
+    .catch((err) => {
+      console.log("FETCH ERROR:", err);
+    });
 }, []);
 
   // ✅ Filtering logic
