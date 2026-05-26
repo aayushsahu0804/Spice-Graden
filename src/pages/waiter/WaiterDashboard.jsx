@@ -19,7 +19,7 @@ function WaiterDashboard() {
 
   useEffect(() => {
   const fetchCalls = () => {
-    fetch("http://localhost:5000/api/waiter")
+    fetch("http://https://spice-garden.onrender.com/api/waiter")
       .then((res) => res.json())
       .then((data) => setCalls(data.data || []))
       .catch(console.error);
@@ -101,7 +101,7 @@ function WaiterDashboard() {
           className="pay-btn"
           onClick={async () => {
             await fetch(
-              `http://localhost:5000/api/waiter/${call._id}`,
+              `http://https://spice-garden.onrender.com/api/waiter/${call._id}`,
               {
                 method: "PATCH",
               }

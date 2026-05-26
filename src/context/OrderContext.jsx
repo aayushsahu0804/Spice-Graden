@@ -36,7 +36,7 @@ export const OrderProvider = ({ children }) => {
 
   const placeOrder = async (cartItems, total, method) => {
   try {
-    const response = await fetch("http://localhost:5000/api/orders", {
+    const response = await fetch("http://https://spice-garden.onrender.com/api/orders", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

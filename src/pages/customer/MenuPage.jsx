@@ -25,7 +25,7 @@ const tableNumber =
 
   // ✅ Fetch from backend
   useEffect(() => {
-    fetch("http://localhost:5000/api/menu")
+    fetch("http://https://spice-garden.onrender.com/api/menu")
       .then(res => res.json())
       .then(data => {
   console.log(data);
@@ -49,7 +49,7 @@ const tableNumber =
   const callWaiter = async () => {
   try {
     const response = await fetch(
-      "http://localhost:5000/api/waiter",
+      "http://https://spice-garden.onrender.com/api/waiter",
       {
         method: "POST",
         headers: {
