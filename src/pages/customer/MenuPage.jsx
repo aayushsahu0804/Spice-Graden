@@ -37,6 +37,8 @@ useEffect(() => {
 
   // ✅ Filtering logic
   const filtered = foodData.filter((item) => {
+    console.log("FOODDATA STATE:", foodData);
+console.log("FILTERED:", filtered);
  const matchesCat =
   category === "All" || item.category === category;
 
