@@ -24,16 +24,16 @@ const tableNumber =
 }, [tableNumber]);
 
   // ✅ Fetch from backend
-  useEffect(() => {
-    fetch("https://spice-graden.onrender.com/api/menu")
-      .then(res => res.json())
-      .then(data => {
-  console.log(data);
- setFoodData(data.data || []);
- console.log("MENU DATA:", data.data);
-})
-      .catch(err => console.log(err));
-  }, []);
+useEffect(() => {
+  fetch("https://spice-garden.onrender.com/api/menu")
+    .then((res) => res.json())
+    .then((data) => {
+      console.log("API DATA:", data);
+      setFoodData(data.data || []);
+      console.log("MENU DATA:", data.data);
+    })
+    .catch((err) => console.log(err));
+}, []);
 
   // ✅ Filtering logic
   const filtered = foodData.filter((item) => {
