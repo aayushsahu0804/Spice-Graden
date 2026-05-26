@@ -25,7 +25,7 @@ const tableNumber =
 
   // ✅ Fetch from backend
   useEffect(() => {
-    fetch("http://https://spice-garden.onrender.com/api/menu")
+    fetch("https://spice-graden.onrender.com/api/menu")
       .then(res => res.json())
       .then(data => {
   console.log(data);
