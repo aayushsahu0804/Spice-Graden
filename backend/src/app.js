@@ -53,13 +53,4 @@ app.use(errorHandler);
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`🚀 Server running on http://localhost:${PORT}`);
-  console.log(`📋 Endpoints:`);
-  console.log(`   GET  /api/menu              — Menu (sorted by popularity)`);
-  console.log(`   GET  /api/menu/popular      — Top 5 most ordered`);
-  console.log(`   GET  /api/menu/:id          — Single item`);
-  console.log(`   POST /api/orders            — Place order`);
-  console.log(`   GET  /api/orders            — All orders`);
-  console.log(`   GET  /api/kitchen/orders    — Active orders (kitchen)`);
-  console.log(`   PATCH /api/kitchen/orders/:id/items/:itemId — Update item status`);
-  console.log(`   PATCH /api/kitchen/orders/:id/serve         — Mark served`);
 });
