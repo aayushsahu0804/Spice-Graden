@@ -1,0 +1,222 @@
+import { useSearchParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import Navbar from "../../components/Navbar";
+import FoodCard from "../../components/FoodCard";
+import CartFlash from "../../components/CartFlash";
+import "../../index.css";
+
+const categories = [
+  "All",
+  "Starters",
+  "Main Course",
+  "Salad",
+  "Drinks",
+  "Desserts",
+];
+
+// ✅ Works for BOTH localhost and Render
+const API_URL =
+  import.meta.env.VITE_API_URL ||
+  "http://localhost:5000";
+
+function MenuPage() {
+  const [category, setCategory] =
+    useState("All");
+
+  const [search, setSearch] =
+    useState("");
+
+  const [foodData, setFoodData] =
+    useState([]);
+
+  const [searchParams] =
+    useSearchParams();
+
+  const tableNumber =
+    searchParams.get("table") || 1;
+
+  // ✅ Save table number
+  useEffect(() => {
+    localStorage.setItem(
+      "tableNumber",
+      tableNumber
+    );
+  }, [tableNumber]);
+
+  // ✅ Fetch menu
+  useEffect(() => {
+    fetch(`${API_URL}/api/menu`)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(
+          "API DATA:",
+          data
+        );
+
+        setFoodData(
+          data.data || []
+        );
+      })
+      .catch((err) => {
+        console.log(
+          "FETCH ERROR:",
+          err
+        );
+      });
+  }, []);
+
+  console.log(
+    "FOODDATA STATE:",
+    foodData
+  );
+
+  // ✅ Filter items
+  const filtered =
+    foodData.filter((item) => {
+      const matchesCat =
+        category === "All" ||
+        item.category === category;
+
+      const matchesSearch =
+        item.name
+          .toLowerCase()
+          .includes(
+            search.toLowerCase()
+          );
+
+      return (
+        matchesCat &&
+        matchesSearch
+      );
+    });
+
+  console.log(
+    "FILTERED:",
+    filtered
+  );
+
+  // ✅ Call waiter
+  const callWaiter =
+    async () => {
+      try {
+        const response =
+          await fetch(
+            `${API_URL}/api/waiter`,
+            {
+              method: "POST",
+              headers: {
+                "Content-Type":
+                  "application/json",
+              },
+              body: JSON.stringify({
+                tableNumber,
+              }),
+            }
+          );
+
+        const data =
+          await response.json();
+
+        if (data.success) {
+          alert(
+            "🛎 Waiter has been notified!"
+          );
+        }
+      } catch (error) {
+        console.error(error);
+
+        alert(
+          "Unable to call waiter"
+        );
+      }
+    };
+
+  return (
+    <div className="menu-container">
+      <CartFlash />
+
+      <Navbar
+        title="Menu"
+        onSearch={setSearch}
+      />
+
+      {/* Table Number */}
+      <div
+        style={{
+          textAlign: "center",
+          fontWeight: "bold",
+          marginBottom: "10px",
+          color: "#c45a00",
+        }}
+      >
+        🍽 Table {tableNumber}
+      </div>
+
+      {/* Categories */}
+      <div className="category-tabs">
+        {categories.map((cat) => (
+          <button
+            key={cat}
+            className={`tab-btn ${category === cat
+                ? "active"
+                : ""
+              }`}
+            onClick={() =>
+              setCategory(cat)
+            }
+          >
+            {cat}
+          </button>
+        ))}
+      </div>
+
+      {/* Search Results */}
+      {search && (
+        <p className="search-results-label">
+          {filtered.length} result
+          {filtered.length !== 1
+            ? "s"
+            : ""}{" "}
+          for "{search}"
+        </p>
+      )}
+
+      {/* Food Grid */}
+      {filtered.length > 0 ? (
+        <div className="food-grid">
+          {filtered.map((food) => (
+            <FoodCard
+              key={food._id}
+              food={{
+                ...food,
+
+                // ✅ Full image URL
+                image: food.image,
+              }}
+            />
+          ))}
+        </div>
+      ) : (
+        <div className="empty-state">
+          <p>🍽️ No dishes found</p>
+
+          <span>
+            Try a different search
+            or category
+          </span>
+        </div>
+      )}
+
+      {/* Waiter Button */}
+      <button
+        className="call-waiter-float"
+        onClick={callWaiter}
+        title="Call Waiter"
+      >
+        🛎
+      </button>
+    </div>
+  );
+}
+
+export default MenuPage;
