@@ -10,7 +10,7 @@ const CustomerLayout = ({ navbarTitle }) => {
       <main className="content">
         <Outlet />
       </main>
-    </div>
+    </div>   
   );
 };
     
