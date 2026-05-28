@@ -1,16 +1,59 @@
-# React + Vite
+# Spice-Graden 🍽️
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Project Description
+Spice-Graden is a full-stack restaurant management and digital ordering system developed using the MERN stack. The application allows customers to browse menu items, place orders digitally, and notify waiters directly from the interface. It also includes kitchen and waiter management functionalities for efficient restaurant workflow.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Technology Stack
 
-## React Compiler
+### Frontend
+- React.js
+- Vite
+- Tailwind CSS
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Backend
+- Node.js
+- Express.js
 
-## Expanding the ESLint configuration
+### Database
+- MongoDB Atlas
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Deployment
+- Frontend: Vercel
+- Backend: Render
+
+### Tools Used
+- Git & GitHub
+- VS Code
+- Postman
+
+---
+
+## Features Implemented
+
+### Customer Features
+- Browse menu items
+- Search dishes
+- Filter by categories
+- Add items to cart
+- Place orders
+- Call waiter functionality
+- Responsive UI
+
+### Kitchen Features
+- View incoming orders
+- Update order status
+
+### Waiter Features
+- Receive waiter calls
+- Manage table requests
+
+---
+
+## Installation and Execution Steps
+
+### Clone Repository
+
+```bash
+git clone https://github.com/YOUR_USERNAME/Spice-Graden.git
